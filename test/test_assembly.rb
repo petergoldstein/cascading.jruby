@@ -62,7 +62,7 @@ class TC_Assembly < Test::Unit::TestCase
         count
       end
       pipe = assembly.tail_pipe
-      assert Java::CascadingPipe::Every, pipe.class
+      assert_equal Java::CascadingPipe::Every, pipe.class
     end
     assert_match /^undefined local variable or method `count' for #<Cascading::Assembly:.*>$/, ex.message
   end
@@ -74,7 +74,7 @@ class TC_Assembly < Test::Unit::TestCase
           every 'line', :aggregator => count_aggregator, :output => 'count'
         end
       end
-      assert Java::CascadingPipe::Every, assembly.tail_pipe.class
+      assert_equal Java::CascadingPipe::Every, assembly.tail_pipe.class
       assert_equal ['line'], assembly.tail_pipe.argument_selector.to_a
       assert_equal ['count'], assembly.tail_pipe.output_selector.to_a
 
@@ -83,7 +83,7 @@ class TC_Assembly < Test::Unit::TestCase
           count
         end
       end
-      assert Java::CascadingPipe::Every, assembly.tail_pipe.class
+      assert_equal Java::CascadingPipe::Every, assembly.tail_pipe.class
 
       # NOTE: this is not valid when we optimize using CountBy
       #assert_equal last_grouping_fields, assembly.tail_pipe.argument_selector

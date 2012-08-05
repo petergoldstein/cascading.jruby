@@ -1,3 +1,4 @@
+# encoding: UTF-8
 #! /usr/bin/env jruby
 
 # Look in the tasks/setup.rb file for the various options that can be

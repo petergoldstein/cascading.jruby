@@ -62,11 +62,12 @@ class TC_Operations < Test::Unit::TestCase
   end
 
   def test_coerce_to_java_other
-    result = coerce_to_java([1,2,3])
+    orig_val = [1,2,3]
+    result = coerce_to_java(orig_val)
 
     assert_equal Java::JavaLang::String, result.class
     assert_equal ''.to_java(java.lang.String).java_class, result.java_class
-    assert_equal '123'.to_java(java.lang.String), result
+    assert_equal orig_val.to_s.to_java(java.lang.String), result
   end
 
   def test_to_java_comparable_array

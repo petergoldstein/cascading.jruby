@@ -47,7 +47,7 @@ context Cascading::Scope do
   end
 
   it 'should propagate names through CoGroup with no Aggregations' do
-    post_join_block = lambda do
+    post_join_block = lambda do |assembly|
       check_scope :values_fields => ['offset', 'line', 'x', 'y', 'z', 'offset_', 'line_', 'x_', 'y_', 'z_'],
         :grouping_fields => ['x', 'x_']
     end
@@ -79,7 +79,7 @@ context Cascading::Scope do
   end
 
   it 'should propagate names through Every' do
-    post_join_block = lambda do
+    post_join_block = lambda do |assembly|
       check_scope :values_fields => ['x', 'x_', 'x_sum', 'y_sum']
       assert_size_equals 4
     end
@@ -98,7 +98,7 @@ context Cascading::Scope do
   end
 
   it 'should pass values fields to Each immediately following CoGroup and remove grouping fields' do
-    post_join_block = lambda do
+    post_join_block = lambda do |assembly|
       assert_size_equals 10
       check_scope :values_fields => ['offset', 'line', 'x', 'y', 'z', 'offset_', 'line_', 'x_', 'y_', 'z_']
     end
@@ -106,7 +106,7 @@ context Cascading::Scope do
   end
 
   it 'should fail to pass grouping fields to Every immediately following Each' do
-    post_join_block = lambda do
+    post_join_block = lambda do |assembly|
       pass
       check_scope :values_fields => ['offset', 'line', 'x', 'y', 'z', 'offset_', 'line_', 'x_', 'y_', 'z_']
       sum :mapping => {'x' => 'x_sum'}, :type => :int
@@ -120,7 +120,7 @@ context Cascading::Scope do
   end
 
   it 'should propagate values fields and field names into branch' do
-    post_join_block = lambda do
+    post_join_block = lambda do |assembly|
       branch 'data_tuple' do
         check_scope :values_fields => ['offset', 'line', 'x', 'y', 'z', 'offset_', 'line_', 'x_', 'y_', 'z_'],
           :grouping_fields => ['x', 'x_']

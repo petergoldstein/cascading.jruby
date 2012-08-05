@@ -36,7 +36,7 @@ module Cascading
     args.empty? ? PATH : ::File.join(PATH, args.flatten)
   end
 
-  def self.require_all_jars(from = ::File.join(::File.dirname(__FILE__), "..", "jars"))
+  def self.require_all_jars(from = ::File.join(::File.dirname(__FILE__), "..", "build", "lib"))
     search_me = ::File.expand_path(
         ::File.join(from, '**', '*.jar'))
     Dir.glob(search_me).sort.each do |jar|

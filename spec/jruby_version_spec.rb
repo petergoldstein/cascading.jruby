@@ -54,7 +54,7 @@ context Object do
       result = e.validate
       result.should == 0
     end
-  when '1.5.3', '1.6.5'
+  when '1.5.3', '1.6.5', '1.6.7.2'
     it 'should handle Fixnum -> Integer for ExprStub#eval' do
       e = ExprStub.new('x:int + y:int')
       result = e.eval(:x => 2, :y => 3)

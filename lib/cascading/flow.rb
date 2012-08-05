@@ -18,6 +18,7 @@ module Cascading
     def initialize(name, parent, params = {})
       @properties, @sources, @sinks, @incoming_scopes, @outgoing_scopes, @listeners = {}, {}, {}, {}, {}, []
       @mode = Mode.parse(params[:mode])
+      @flow_scope = Scope.flow_scope(name)
       super(name, parent)
       self.class.add(name, self)
     end
@@ -30,14 +31,16 @@ module Cascading
       assembly
     end
 
-    # Create a new source for this flow, using the specified name and c.Tap.
+    # Create a new source for this flow, using the specified name and
+    # Cascading::Tap
     def source(name, tap)
       sources[name] = tap
-      incoming_scopes[name] = Scope.tap_scope(mode.source_tap(name, tap), name)
+      incoming_scopes[name] = Scope.source_scope(name, mode.source_tap(name, tap), @flow_scope)
       outgoing_scopes[name] = incoming_scopes[name]
     end
 
-    # Create a new sink for this flow, using the specified name and c.Tap.
+    # Create a new sink for this flow, using the specified name and
+    # Cascading::Tap
     def sink(name, tap)
       sinks[name] = tap
     end

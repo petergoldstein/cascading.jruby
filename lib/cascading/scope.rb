@@ -10,12 +10,18 @@ module Cascading
       Scope.new(Java::CascadingFlowPlanner::Scope.new(@scope))
     end
 
+    def self.flow_scope(name)
+      Java::CascadingFlowPlanner::Scope.new(name)
+    end
+
     def self.empty_scope(name)
       Scope.new(Java::CascadingFlowPlanner::Scope.new(name))
     end
 
-    def self.tap_scope(tap, name)
-      java_scope = outgoing_scope_for(tap, java.util.HashSet.new)
+    def self.source_scope(name, tap, flow_scope)
+      incoming_scopes = java.util.HashSet.new
+      incoming_scopes.add(flow_scope)
+      java_scope = outgoing_scope_for(tap, incoming_scopes)
       # Taps and Pipes don't name their outgoing scopes like other FlowElements
       java_scope.name = name
       Scope.new(java_scope)

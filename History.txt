@@ -1,3 +1,9 @@
+0.0.9 - Cascading local mode and upgrade to Cascading 2.0.0
+
+This release upgrades to Cascading 2.0.0 (final) and introduces Cascading local
+mode.  Ambiguous node names are now prohibited and the insert helper correctly
+supports constants.
+
 0.0.8 - AggregateBy and upgrade to Cascading 2.0.0 wip-286
 
 This release upgrades to Cascading 2.0.0 wip-286, but again does not implement

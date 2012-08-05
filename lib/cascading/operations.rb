@@ -114,7 +114,7 @@ module Cascading
     def coerce_to_java(v)
       case v
         when Fixnum
-          java.lang.Integer.new(v)
+          java.lang.Long.new(v)
         when Float
           java.lang.Double.new(v)
         when NilClass
